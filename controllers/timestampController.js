@@ -25,7 +25,11 @@ function dateObj(passedDate) {
         }
 
     } else {
-        return null;
+        return {
+            "unix": null,
+            "natural": null
+        }
+
     }
 
 }
