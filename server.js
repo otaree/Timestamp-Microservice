@@ -9,6 +9,9 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 
+// controller module
+var timestampController = require("./controllers/timestampController.js");
+
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
     var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
@@ -38,6 +41,9 @@ app.route('/')
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
 
+// fire the timestamp controller
+timestampController(app);
+
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
   res.status(404);
@@ -53,13 +59,16 @@ app.use(function(err, req, res, next) {
   }  
 })
 
-//orginal
-/*
+
 app.listen(process.env.PORT, function () {
   console.log('Node.js listening ...');
 });
-*/
+
+
+/* 
+// test
 app.listen(process.argv[2], function () {
   console.log('Node.js listening ...');
 });
+*/
 
